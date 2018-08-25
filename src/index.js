@@ -15,7 +15,7 @@ ReactDOM.render(
 				<Switch>
 					<Route exact path="/" component={App} />
 					<Route path="/checkout/:step" component={Checkout} />
-					<Route path="/checkout" render={() => <Redirect to="/checkout/step1"/>}/>
+					<Route path="/checkout" render={() => <Redirect to="/checkout/dough"/>}/>
 					<Route path="/:randomUrl" component={NotFound} />
 				</Switch>
 			</Router>

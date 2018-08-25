@@ -1,38 +1,36 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
-import Step1 from './Step1';
-import Step2 from './Step2'
+import DoughStep from './DoughStep';
+import IngredientsStep from './IngredientsStep';
+import ReviewStep from './ReviewStep';
+import StepperProgress from './StepperProgress';
 
 
 
-class Checkout extends Component  {
+const Checkout = ({ match }) =>  {
 	
-	constructor(){
-		super();
-		this.state = {
-			
-		}
-	}
+	function renderStep (step){
+		//const currentStep = match.params.step;
+		console.log("current step is: ", step);
 
-	renderStep = () => {
-		const currentStep = this.props.match.params.step;
-		switch(currentStep){
-			case 'step1':
-				return <Step1 />
-			case 'step2':
-				return <Step2 />
+		switch(step){
+			case 'dough':
+				return <DoughStep />
+			case 'ingredients':
+				return <IngredientsStep />
+			case 'review':
+				return <ReviewStep />
 			default:
 				return <p>undefined step</p>
 		}
 	}
-	render(){
-		console.log("match params: ", )
+	
 		return(
 			<Grid>
 				<Row>
 					<Col xs={12}>
-						<h1>Progress:</h1>
+						<StepperProgress currentStep={match.params.step}/>
 					</Col>
 				</Row>
 				<Row>
@@ -41,14 +39,14 @@ class Checkout extends Component  {
 					</Col>
 					<Col xs={12} sm={8}>
 						<div className="step-container">
-							{this.renderStep()}
+							{renderStep(match.params.step)}
 						</div>
 					</Col>
 
 				</Row>
 			</Grid>
 		)
-	}
+	
 }
 
 export default Checkout;
