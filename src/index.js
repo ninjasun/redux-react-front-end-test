@@ -9,15 +9,17 @@ import Checkout from './Checkout';
 import NotFound from './NotFound';
 
 ReactDOM.render(
-		<Router>
-			<Switch>
-               
-				<Route exact path="/" component={App} />
-				<Route path="/checkout/:step" component={Checkout} />
-				<Route path="/checkout" render={() => <Redirect to="/checkout/step1"/>}/>
-				<Route path="/:randomUrl" component={NotFound} />
-					
-			</Switch>
-		</Router>
+		<div>
+			<header className="header" />
+			<Router>
+				<Switch>
+					<Route exact path="/" component={App} />
+					<Route path="/checkout/:step" component={Checkout} />
+					<Route path="/checkout" render={() => <Redirect to="/checkout/step1"/>}/>
+					<Route path="/:randomUrl" component={NotFound} />
+				</Switch>
+			</Router>
+			<footer className="footer"/>
+		</div>
 		, document.getElementById('root'));
 registerServiceWorker();
