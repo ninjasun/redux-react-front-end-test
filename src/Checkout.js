@@ -34,13 +34,14 @@ const Checkout = ({ match }) =>  {
 					</Col>
 				</Row>
 				<Row>
-					<Col xs={12} sm={4}>
-						<h1>My pizza:</h1>
-					</Col>
+					
 					<Col xs={12} sm={8}>
 						<div className="step-container">
 							{renderStep(match.params.step)}
 						</div>
+					</Col>
+					<Col xs={12} sm={4}>
+						<h1>My pizza:</h1>
 					</Col>
 
 				</Row>

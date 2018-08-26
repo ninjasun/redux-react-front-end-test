@@ -1,25 +1,20 @@
+
+
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import App from './App'
-import Checkout from './Checkout';
-import NotFound from './NotFound';
+import { render } from 'react-dom';
+import { createStore } from 'redux';
 
-ReactDOM.render(
-		<div>
-			<header className="header" />
-			<Router>
-				<Switch>
-					<Route exact path="/" component={App} />
-					<Route path="/checkout/:step" component={Checkout} />
-					<Route path="/checkout" render={() => <Redirect to="/checkout/dough"/>}/>
-					<Route path="/:randomUrl" component={NotFound} />
-				</Switch>
-			</Router>
-			<footer className="footer"/>
-		</div>
-		, document.getElementById('root'));
+import './App.css';
+import pizzaOrderApp from './reducers';
+import Root from './components/Root';
+
+
+const store = createStore(pizzaOrderApp);
+
+
+render(
+  <Root store={store} />,
+  document.getElementById('root')
+)
 registerServiceWorker();

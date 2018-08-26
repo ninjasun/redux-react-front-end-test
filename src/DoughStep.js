@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+
 import { Row, Col } from 'react-bootstrap';
-import  { fetchDoughtTypes }  from './API_MOCK';
+import  { fetchDoughsTypes }  from './API_MOCK';
+import { setDoughType } from './reducers/dough';
 /*
 	load and display data from API: impasto
 	load current pizza 
@@ -11,35 +16,65 @@ class DoughStep extends Component {
 	constructor(){
 		super();
 		this.state = {
-			doughTypes : [],
+			doughs : [],
 		}
 	}
+
+
 	componentDidMount(){
-		var doughTypes = fetchDoughtTypes();
+		const doughs = fetchDoughsTypes();
 		this.setState({
-			doughTypes : doughTypes,
+			doughs : doughs,
 		})
 	}
 
-	render(){
 
+	handleDoughChange = (event) => {
+		
+		this.props.setDoughType(parseInt(event.target.value))
+	
+	}
+
+
+	render(){
+		console.log("state: ", this.state)
+		console.log("props: ", this.props)
 		return(
 			<Row>
 				<Col xs={12}>
 					<h1>Choose your dough types</h1>
 				</Col>
 				<Col xs={12}>
-					<ul>
-					{this.state.doughTypes.map( item => 
-						<li key={item.id}>
-							<span>{item.name}</span>
-						</li>
+					<form>
+					{this.state.doughs.map( item => 
+						<div className="dough-radio-item" key={item.id}>
+							<label>
+								<input type="radio" value={item.id} checked={item.id === this.props.doughId} onChange={this.handleDoughChange} />
+								{item.name}
+								{item.description}
+								{item.price} $
+							</label>
+						</div>
 						)}
-					</ul>
+					</form>
 				</Col>
 			</Row>
 		)
 	}
 }
 
-export default DoughStep;
+const mapStateToProps = state => ({
+	doughId : state.dough.doughId,
+})
+
+const mapDispatchToProps = dispatch => 
+	bindActionCreators(
+		{
+			setDoughType,
+		},
+		dispatch,
+	);
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DoughStep);
