@@ -1,13 +1,11 @@
-
-
 import React from 'react';
 import registerServiceWorker from './registerServiceWorker';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 
 import './App.css';
-import pizzaOrderApp from './reducers';
-import Root from './components/Root';
+import  pizzaOrderApp from './redux-modules';
+import { Root } from './components/';
 
 
 const store = createStore(pizzaOrderApp);

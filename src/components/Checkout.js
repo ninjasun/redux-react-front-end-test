@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
-import DoughStep from './DoughStep';
-import IngredientsStep from './IngredientsStep';
-import ReviewStep from './ReviewStep';
-import StepperProgress from './StepperProgress';
+import { DoughStep, IngredientsStep, ReviewStep } from '../containers/';
+
+import { StepperProgress } from './';
 
 
 
@@ -35,19 +34,19 @@ const Checkout = ({ match }) =>  {
 				</Row>
 				<Row>
 					
-					<Col xs={12} sm={8}>
+					<Col xs={12} sm={12}>
 						<div className="step-container">
 							{renderStep(match.params.step)}
 						</div>
-					</Col>
-					<Col xs={12} sm={4}>
-						<h1>My pizza:</h1>
 					</Col>
 
 				</Row>
 			</Grid>
 		)
 	
+}
+Checkout.propTypes = {
+	match : PropTypes.object.isRequired,
 }
 
 export default Checkout;

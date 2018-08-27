@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import App from '../App';
-import Checkout from '../Checkout';
-import NotFound from '../NotFound';
+import { Home, NotFound, Checkout } from './';
+
 
 
 const Root = ({ store }) => (
@@ -15,7 +14,7 @@ const Root = ({ store }) => (
 				<header className="header" />
 				<Router>
 					<Switch>
-						<Route exact path="/" component={App} />
+						<Route exact path="/" component={Home} />
 						<Route path="/checkout/:step" component={Checkout} />
 						<Route path="/checkout" render={() => <Redirect to="/checkout/dough"/>}/>
 						<Route path="/:randomUrl" component={NotFound} />
@@ -25,5 +24,9 @@ const Root = ({ store }) => (
 			</div>
 		</Provider>
 	)
+
+Root.proptTypes = {
+	store: PropTypes.object.isRequired,
+}
 
 export default Root;

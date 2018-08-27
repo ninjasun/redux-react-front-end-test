@@ -1,6 +1,6 @@
 
 const initialState = {
-	doughId : 1
+	myDough : {}
 }
 
  export default ( state = initialState, action) => {
@@ -8,8 +8,7 @@ const initialState = {
 		case 'GET_DOUGH':
 			return state;
 		case 'SET_DOUGH':
-			console.log("SET_DOUGH: ", action)
-			return {...state, doughId: action.doughId}
+			return {...state, myDough: action.dough}
 		default:
 			return state;
 	}
@@ -21,8 +20,8 @@ export const getDough = () => ({
 })
 
 
-export const setDoughType = (doughId) => ({
+export const setDoughType = (dough) => ({
 	type: 'SET_DOUGH',
-	doughId: doughId,
+	dough: dough,
 })
 

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-
+import { StepperButton } from '../components/';
 import { Row, Col } from 'react-bootstrap';
-import  { fetchDoughsTypes }  from './API_MOCK';
-import { setDoughType } from './reducers/dough';
+import  { fetchDoughsTypes }  from '../API_MOCK';
+import { setDoughType } from '../redux-modules/dough';
+
 /*
 	load and display data from API: impasto
 	load current pizza 
@@ -16,7 +18,7 @@ class DoughStep extends Component {
 	constructor(){
 		super();
 		this.state = {
-			doughs : [],
+			doughs: [],
 		}
 	}
 
@@ -29,16 +31,16 @@ class DoughStep extends Component {
 	}
 
 
-	handleDoughChange = (event) => {
+	handleDoughChange = (item) => {
 		
-		this.props.setDoughType(parseInt(event.target.value))
+		this.props.setDoughType(item)
 	
 	}
 
 
 	render(){
-		console.log("state: ", this.state)
-		console.log("props: ", this.props)
+		//console.log("state: ", this.state)
+		//console.log("props: ", this.props)
 		return(
 			<Row>
 				<Col xs={12}>
@@ -49,7 +51,7 @@ class DoughStep extends Component {
 					{this.state.doughs.map( item => 
 						<div className="dough-radio-item" key={item.id}>
 							<label>
-								<input type="radio" value={item.id} checked={item.id === this.props.doughId} onChange={this.handleDoughChange} />
+								<input type="radio" value={item.id} checked={item.id === this.props.myDough.id} onChange={() =>{this.handleDoughChange(item)}} />
 								{item.name}
 								{item.description}
 								{item.price} $
@@ -58,13 +60,25 @@ class DoughStep extends Component {
 						)}
 					</form>
 				</Col>
+				<Col xs={12}>
+					<StepperButton  to="/checkout/ingredients">NEXT</StepperButton>
+				</Col>
 			</Row>
 		)
 	}
 }
 
+DoughStep.propTypes = {
+	myDough: PropTypes.shape({
+		id: PropTypes.number.isRequired,
+		name: PropTypes.string.isRequired,
+		description: PropTypes.string.isRequired,
+		price: PropTypes.string.isRequired,
+	}).isRequired,
+}
+
 const mapStateToProps = state => ({
-	doughId : state.dough.doughId,
+	myDough : state.dough.myDough,
 })
 
 const mapDispatchToProps = dispatch => 
