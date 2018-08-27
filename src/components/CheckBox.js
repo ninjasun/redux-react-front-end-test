@@ -39,6 +39,7 @@ class CheckBox extends React.Component {
           checked={this.state.isChecked}
           onChange={this.toggleChange}
           value={this.props.value}
+          type={this.props.type}
         />
         {this.props.name}
        </label>
@@ -48,6 +49,7 @@ class CheckBox extends React.Component {
 
 CheckBox.propType = {
   checked : PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
 }
 
 CheckBox.defaultProp = {

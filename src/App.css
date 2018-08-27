@@ -60,6 +60,7 @@ body{
   flex: 1;
   justify-content: center;
   background-color: red;
+  opacity: .7;
   color: white;
   line-height: 30px;
   text-transform: uppercase;
@@ -75,4 +76,58 @@ body{
 .stepper-progress-container ul li:last-child{
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+
+.stepper-progress-container ul li.active{
+  opacity: 1;
+   -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.btn-stepper{
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 8px 24px;
+
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.btn-stepper:hover, .btn-stepper:focus{
+  background-color: white;
+  border-color: red;
+  color: red;
+  text-decoration: none;
+   -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.btn-stepper:disabled{
+  opacity: .7;
+}
+
+.btn-stepper:disabled:hover, .btn-stepper:disabled:focus{
+  background-color: red;
+  color: white;
+}
+
+.pizza-item-container{
+
+}
+
+.step-container{
+  height: 100%;
+  min-height: 600px;
 }

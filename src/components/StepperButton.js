@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 
-const StepperButton = ({ className, to, children }) => {
+const StepperButton = ({  onClick, children, disabled }) => {
 	return(
-		<Link className={className} to={to}>{children}</Link>
+		<button type="button" disabled={disabled} className="btn-stepper" onClick={onClick}>{children}</button>
 	)
 }
 
 StepperButton.propTypes = {
-	className: PropTypes.string.isRequired,
-	to: PropTypes.string.isRequired,
+	onClick: PropTypes.func,
 	children: PropTypes.string.isRequired,
+	disabled: PropTypes.bool,
 }
 
 StepperButton.defaultProp = {
-	className: 'btn-stepper',	
+	disabled: false,
 }
 
 export default StepperButton;

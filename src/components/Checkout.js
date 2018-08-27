@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransitionGroup } from 'react-transition-group';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { DoughStep, IngredientsStep, ReviewStep } from '../containers/';
 
@@ -10,21 +11,18 @@ import { StepperProgress } from './';
 const Checkout = ({ match }) =>  {
 	
 	function renderStep (step){
-		//const currentStep = match.params.step;
-		console.log("current step is: ", step);
-
 		switch(step){
 			case 'dough':
-				return <DoughStep />
+				return   <DoughStep key="doughAnimation"/>
 			case 'ingredients':
-				return <IngredientsStep />
+				return  <IngredientsStep key="ingredientsAnimation" />
 			case 'review':
-				return <ReviewStep />
+				return <ReviewStep key="reviewAnimation"/>
 			default:
 				return <p>undefined step</p>
 		}
 	}
-	
+		var currentStep = renderStep(match.params.step);
 		return(
 			<Grid>
 				<Row>
@@ -32,19 +30,23 @@ const Checkout = ({ match }) =>  {
 						<StepperProgress currentStep={match.params.step}/>
 					</Col>
 				</Row>
-				<Row>
-					
-					<Col xs={12} sm={12}>
-						<div className="step-container">
-							{renderStep(match.params.step)}
-						</div>
-					</Col>
-
-				</Row>
+				
+				 	<CSSTransitionGroup 
+				 		component="div"
+				 		className="step-container"
+				        transitionName="carousel"
+				        transitionAppear={true}
+				        transitionAppearTimeout={1500}
+				        transitionEnter={false}
+				        transitionLeave={false}
+				        >
+						{currentStep}
+					</CSSTransitionGroup>
+				
 			</Grid>
 		)
-	
 }
+
 Checkout.propTypes = {
 	match : PropTypes.object.isRequired,
 }

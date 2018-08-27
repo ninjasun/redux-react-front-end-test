@@ -1,6 +1,6 @@
 
 const initialState = {
-	myDough : {}
+	myDough : {},
 }
 
  export default ( state = initialState, action) => {

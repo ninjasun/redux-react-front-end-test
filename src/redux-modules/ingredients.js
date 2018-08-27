@@ -5,9 +5,7 @@ const initialState = {
 
 export default ( state = initialState, action) =>{
 	switch(action.type){
-		case 'GET_INGREDIENTS':
-			return state.myIngredients;
-
+	
 		case 'ADD_INGREDIENT':
 			return {
 				...state,
@@ -24,12 +22,6 @@ export default ( state = initialState, action) =>{
 			return state;
 	}
 }
-
-
-
-export const getIngredients = () => ({
-	type: 'GET_INGREDIENTS',
-})
 
 
 export const addIngredient = (item) => ({
