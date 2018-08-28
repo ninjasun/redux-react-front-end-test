@@ -6,7 +6,7 @@ import Home from './Home';
 import StepperButton from './StepperButton';
 import StepperProgress from './StepperProgress';
 import OrderCard from './OrderCard';
-
+import PizzaItem from './PizzaItem';
 
 export {
 	CheckBox,
@@ -17,4 +17,5 @@ export {
 	StepperButton,
 	StepperProgress,
 	OrderCard,
+	PizzaItem,
 }

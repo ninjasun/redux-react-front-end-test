@@ -9,8 +9,8 @@ import { addIngredient, removeIngredient } from '../redux-modules/ingredients';
 import { setStepCompleted } from '../redux-modules/stepper';
 
 import  { fetchIngredients }  from '../API_MOCK';
-
-import { StepperButton, CheckBox } from '../components/';
+ 
+import { StepperButton, CheckBox, PizzaItem } from '../components/';
 
 /*
 	load and display data from API: impasto
@@ -84,7 +84,6 @@ class IngredientsStep extends Component {
 	}
 
 	
-
 	render(){
 		
 		return(
@@ -95,20 +94,14 @@ class IngredientsStep extends Component {
 				<Col xs={12}>
 					<ul className="list-container" aria-labelledby="ingredients">
 							{this.state.ingredients.map( item => 
-								<li className={this.includes(item) ? "pizza-item selected" : 'pizza-item'} key={item.id} tabIndex="0" role="checkbox">
-									<label>
-										<CheckBox 
-											checked={this.includes(item)} 
-											type="checkbox"
-											name={item.name}  
-											value={item.id}  
-											onChange={(e) => {this.handleIngredientChange(e,item)}} 
-										/>
-										<span className="item-info" >{item.name}</span>
-										<span className="item-price" >{item.price} $</span>
-									</label>
-								</li>
-								)}
+								<PizzaItem 
+									item={item}
+									role="checkbox"
+									type="checkbox" 
+									isSelected={this.includes(item)} 
+									onChange={this.handleIngredientChange} 
+								/>
+							)}
 						</ul>
 				</Col>
 				<Col xs={6} style={{"textAlign":'center'}}>
