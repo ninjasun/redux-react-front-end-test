@@ -19,10 +19,10 @@ function OrderCard({dough, ingredients, price}){
 	)
 }
 
-OrderCard.PropTypes = {
+OrderCard.propTypes = {
 	
 	ingredients: PropTypes.array,
-	price: PropTypes.number.isRequired,
+	price: PropTypes.string.isRequired,
 }
 
 export default OrderCard;

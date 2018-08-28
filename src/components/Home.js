@@ -14,7 +14,8 @@ const Home = ({history}) => {
 		<Grid>
 			<Row>
 				<Col xs={12} style={{'textAlign': 'center'}}>
-					<h1 style={{'marginBottom':'200px', 'marginTop':'100px'}}>Welcome to pizza experience</h1>
+					<h1 style={{'marginTop':'100px'}}>Welcome to the pizza experience</h1>
+					<h2 style={{'fontStyle':'italic','marginBottom':'150px'}}>The real italian pizza</h2>
 					<StepperButton onClick={next}>ORDER</StepperButton>
 				</Col>
 			</Row>

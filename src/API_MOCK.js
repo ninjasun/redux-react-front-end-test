@@ -85,18 +85,6 @@ const fetchIngredients = function(){
 			price: '0.50',
 		},
 		{
-			id: 14,
-			name: 'Salami',
-			description: '',
-			price: '0.50',
-		},
-		{
-			id: 15,
-			name: 'Potato',
-			description: '',
-			price: '0.50',
-		},
-		{
 			id: 16,
 			name: 'Bufala',
 			description: '',
