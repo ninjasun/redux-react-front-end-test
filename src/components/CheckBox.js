@@ -26,23 +26,16 @@ class CheckBox extends React.Component {
     this.props.onChange();
   }
 
-  componentWillReceiveProps= (nextProps) =>{
-    //console.log("nextprops: ", nextProps)
-  }
 
   render() {
-    //console.log("CHECKBOX ID: ", this.props.value);
-    //console.log("CHECKED? ", this.props)
     return (
-      <label>
-        <input type="checkbox"
+        <input 
+          type="checkbox"
           checked={this.state.isChecked}
           onChange={this.toggleChange}
           value={this.props.value}
           type={this.props.type}
         />
-        {this.props.name}
-       </label>
     );
   }
 }
@@ -55,4 +48,5 @@ CheckBox.propType = {
 CheckBox.defaultProp = {
   checked: false,
 }
+
 export default CheckBox;

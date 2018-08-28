@@ -11,9 +11,7 @@ import { setDoughType } from '../redux-modules/dough';
 import { setStepCompleted } from '../redux-modules/stepper';
 
 /*
-	load and display data from API: impasto
-	load current pizza 
-	display a form
+	first step. Choose a dough type
 */
 
 class DoughStep extends Component {
@@ -49,23 +47,26 @@ class DoughStep extends Component {
 	}
 
 
+	isSelected = (id) =>{
+		return id === this.props.myDough.id;
+	}
+
+
 	render(){
 		
 		return(
-			
-			<Row >
+			<Row className="step-container">
 				<Col xs={12}>
 					<h1>Choose your dough type</h1>
 				</Col>
 				<Col xs={12}>
-					<ul>
+					<ul className="list-container" aria-labelledby="radio_group_doughs">
 					{this.state.doughs.map( item => 
-						<li className="dough-radio-item" key={item.id}>
+						<li className={this.isSelected(item.id) ? "pizza-item selected" : 'pizza-item'} key={item.id} tabIndex="0" role="radio">
 							<label>
-								<input type="radio" value={item.id} checked={item.id === this.props.myDough.id} onChange={() =>{this.handleDoughChange(item)}} />
-								{item.name}
-								{item.description}
-								{item.price} $
+								<input type="radio" value={item.id} checked={this.isSelected(item.id)} onChange={() =>{this.handleDoughChange(item)}} />
+								<span className="item-info" >{item.description}</span>
+								<span className="item-price" >{item.price} $</span>
 							</label>
 						</li>
 						)}

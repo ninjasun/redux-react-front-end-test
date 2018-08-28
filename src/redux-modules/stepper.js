@@ -8,7 +8,6 @@ const initialState =  [
  export default ( state = initialState, action) => {
 	switch(action.type){
 		case 'SET_STEP_COMPLETED':
-			console.log("SET STEP COMPLETED: ",action)
 			return state.map( step =>
 				(step.name === action.name) ? {...step, completed: true} : step)
 		default:

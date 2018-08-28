@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group';
+
 import { Grid, Row, Col } from 'react-bootstrap';
 import { DoughStep, IngredientsStep, ReviewStep } from '../containers/';
 
@@ -22,29 +22,18 @@ const Checkout = ({ match }) =>  {
 				return <p>undefined step</p>
 		}
 	}
-		var currentStep = renderStep(match.params.step);
-		return(
-			<Grid>
-				<Row>
-					<Col xs={12}>
-						<StepperProgress currentStep={match.params.step}/>
-					</Col>
-				</Row>
-				
-				 	<CSSTransitionGroup 
-				 		component="div"
-				 		className="step-container"
-				        transitionName="carousel"
-				        transitionAppear={true}
-				        transitionAppearTimeout={1500}
-				        transitionEnter={false}
-				        transitionLeave={false}
-				        >
-						{currentStep}
-					</CSSTransitionGroup>
-				
-			</Grid>
-		)
+	var currentStep = renderStep(match.params.step);
+
+	return(
+		<Grid>
+			<Row>
+				<Col xs={12}>
+					<StepperProgress currentStep={match.params.step}/>
+				</Col>
+			</Row>
+			{currentStep}
+		</Grid>
+	)
 }
 
 Checkout.propTypes = {

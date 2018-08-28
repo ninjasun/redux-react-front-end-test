@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 /*
@@ -7,20 +10,40 @@ import { withRouter } from 'react-router-dom';
 	inactive has background red opacity 0.7
 */
 
+const StepperProgress = ({stepper, match}) => {
+	
+	const urlStep = match.params.step;
+	
+	const isActive = (stepName) =>{
+		return urlStep === stepName;
+	}
 
+	const isCompleted = (stepIndex) =>{
+		return stepper[stepIndex].completed;
+	}
 
-const StepperProgress = (props) => {
-	console.log("stepper props: ", props)
-	const urlStep = props.match.params.step;
 	return (
 		<div className="stepper-progress-container">
 			<ul>
-				<li className={urlStep === 'dough' ? 'active' : ''}> dough </li>
-				<li className={urlStep === 'ingredients' ? 'active' : ''}>  ingredients </li>
-				<li className={urlStep === 'review' ? 'active' : ''}> review </li>
+				<li className={isActive('dough') || isCompleted(0) ? 'active' : ''}> dough </li>
+				<li className={isActive('ingredients') || isCompleted(1) ? 'active' : ''}>  ingredients </li>
+				<li className={isActive('review') || isCompleted(2) ? 'active' : ''}> review </li>
 			</ul>
 		</div>
 		)
 }
 
-export default withRouter(StepperProgress);
+StepperProgress.propTypes = {
+	stepper: PropTypes.array.isRequired,
+	match: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = state => ({
+	stepper : state.stepper,
+})
+
+export default compose(
+	withRouter,
+	connect(mapStateToProps)
+)(StepperProgress);
+

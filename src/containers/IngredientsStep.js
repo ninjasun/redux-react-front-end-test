@@ -83,25 +83,30 @@ class IngredientsStep extends Component {
 		return !this.props.stepper[1].completed;
 	}
 
+	
 
 	render(){
 		
 		return(
-			<Row>
+			<Row className="step-container">
 				<Col xs={12}>
 					<h1>Choose your ingredients</h1>
 				</Col>
 				<Col xs={12}>
-					<ul>
+					<ul className="list-container" aria-labelledby="ingredients">
 							{this.state.ingredients.map( item => 
-								<li className="pizza-item-container" key={item.id}>
-									<CheckBox 
-										checked={this.includes(item)} 
-										type="checkbox"
-										name={item.name}  
-										value={item.id}  
-										onChange={(e) => {this.handleIngredientChange(e,item)}} 
+								<li className={this.includes(item) ? "pizza-item selected" : 'pizza-item'} key={item.id} tabIndex="0" role="checkbox">
+									<label>
+										<CheckBox 
+											checked={this.includes(item)} 
+											type="checkbox"
+											name={item.name}  
+											value={item.id}  
+											onChange={(e) => {this.handleIngredientChange(e,item)}} 
 										/>
+										<span className="item-info" >{item.name}</span>
+										<span className="item-price" >{item.price} $</span>
+									</label>
 								</li>
 								)}
 						</ul>

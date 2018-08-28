@@ -1,36 +1,18 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+html, body {
+  margin: 0;
+  padding: 0;
+  height:100%;
+  box-sizing: border-box;
+  font-family: 'Playfair Display', serif;
+  background-color: #f5f5f0;
+  color: #1f1f14;
 }
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-body{
-  background-color: lightgrey;
-}
-
 
 .header{
   height: 60px;
   background-color: red;
-
+  box-shadow: 0 0 3px 1px grey;
 }
 
 .container{
@@ -130,4 +112,93 @@ body{
 .step-container{
   height: 100%;
   min-height: 600px;
+
 }
+
+.step-container h1{
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.list-container {
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  max-width: 400px;
+  margin-bottom: 40px;
+}
+
+.list-container li.pizza-item{
+  line-height: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 16px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 1px 1px grey;
+}
+
+li.pizza-item:hover, li.pizza-item:focus {
+   background-color: #ffd6cc;
+}
+
+.list-container li.selected{
+  background-color: #ffd6cc;
+  box-shadow: 0 0 1px 1px black;
+}
+
+li.pizza-item label{
+  position: relative;
+  width: 100%;
+  margin-bottom:0;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+li.pizza-item  label input{
+  display: inline-block;
+  width: 30px;
+  margin-right: 10px;
+}
+
+li.pizza-item .item-info{
+  display: inline-block;
+  
+}
+
+li.pizza-item .item-price{
+  width: 50px;
+  position: absolute;
+  right: 0;
+}
+
+.order-card-container{
+  min-height: 250px;
+  width: 400px;
+  border-radius: 10px;
+  border: 1px solid red;
+  padding: 10px;
+  justify-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  margin-bottom: 60px;
+}
+
+.order-card-container .info{
+  font-weight: bold;
+}
+
+.order-card-container .list-container{
+  text-align: left;
+  padding-left: 50px;
+}
+
+.order-card-container .price{
+  text-align: right;
+  padding-right: 50px;
+}
+

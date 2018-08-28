@@ -3,18 +3,13 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
-
-import { StepperButton } from '../components/';
+import { StepperButton, OrderCard } from '../components/';
 import { Row, Col } from 'react-bootstrap';
 
 
 
 class ReviewStep  extends Component  {
-	constructor(){
-		super();
-	}
-
-
+	
 	componentDidMount = () => {
 		const { history , stepper } = this.props;
 		if(!stepper[0].completed){
@@ -38,6 +33,17 @@ class ReviewStep  extends Component  {
 	}
 
 
+	getTotalPrice = () => {
+		var price = 0;
+		price += parseFloat(this.props.myDough.price);
+		this.props.myIngredients.map( item => {
+			price += parseFloat(item.price);
+		})
+		
+		return price +' $';
+	}
+
+
 	render(){
 		const { history, stepper } = this.props;
 
@@ -46,22 +52,18 @@ class ReviewStep  extends Component  {
 		if (!stepper[1].completed) history.push('/checkout/ingredients');
 
 		const { myDough, myIngredients } = this.props;
+		const totalPrice = this.getTotalPrice();
 
 		return(
-			<Row >
+			<Row className="step-container">
 				<Col xs={12}>
-					<h1>order review</h1>
+					<h1>Order review</h1>
 				</Col>
-				<Col xs={12}>
-					<p>{myDough.name}</p>
-				</Col>
-				<Col xs={12}>
-					<ul>
-						{myIngredients.map( item =>
-							<li key={item.id}>{item.name}</li>
-						)}
-					</ul>
-				</Col>
+				<OrderCard 
+					dough={myDough} 
+					ingredients={myIngredients} 
+					price={totalPrice} 
+				/>
 				<Col xs={6} style={{"textAlign":'center'}} >
 					<StepperButton  onClick={this.prev}>PREV</StepperButton>
 				</Col>

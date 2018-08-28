@@ -15,13 +15,13 @@ const fetchDoughsTypes = function(){
 		{
 			id: 3,
 			name: 'Thick x2',
-			description: 'Double thick and soft pizza dough',
+			description: 'Double size thick and soft pizza dough',
 			price: '5.50',
 		},
 		{
 			id: 4,
 			name: 'Thin x2',
-			description: 'Double thin and soft pizza dough',
+			description: 'Double size thin and soft pizza dough',
 			price: '5.50',
 		},
 		{
@@ -66,6 +66,42 @@ const fetchIngredients = function(){
 			description: '',
 			price: '0.50',
 		},
+		{
+			id: 11,
+			name: 'Gorgonzola',
+			description: '',
+			price: '0.50',
+		},
+		{
+			id: 12,
+			name: 'Mushrooms',
+			description: '',
+			price: '0.50',
+		},
+		{
+			id: 13,
+			name: 'Onion',
+			description: '',
+			price: '0.50',
+		},
+		{
+			id: 14,
+			name: 'Salami',
+			description: '',
+			price: '0.50',
+		},
+		{
+			id: 15,
+			name: 'Potato',
+			description: '',
+			price: '0.50',
+		},
+		{
+			id: 16,
+			name: 'Bufala',
+			description: '',
+			price: '0.50',
+		}
 	]
 }
 

@@ -4,7 +4,15 @@ import PropTypes from 'prop-types';
 
 const StepperButton = ({  onClick, children, disabled }) => {
 	return(
-		<button type="button" disabled={disabled} className="btn-stepper" onClick={onClick}>{children}</button>
+		<button 
+			aria-label={children}
+			type="button" 
+			disabled={disabled} 
+			className="btn-stepper" 
+			onClick={onClick}
+		>
+		{children}
+		</button>
 	)
 }
 

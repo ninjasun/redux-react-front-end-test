@@ -1,25 +1,30 @@
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { StepperButton } from './';
 
 
-const Home = (props) => {
+const Home = ({history}) => {
 	const next = () => {
-		props.history.push("/checkout/dough")
+		history.push("/checkout/dough")
 	}
 
 	return(
 		<Grid>
 			<Row>
 				<Col xs={12} style={{'textAlign': 'center'}}>
-					<h1>Welcome to pizza experience</h1>
+					<h1 style={{'marginBottom':'200px', 'marginTop':'100px'}}>Welcome to pizza experience</h1>
 					<StepperButton onClick={next}>ORDER</StepperButton>
 				</Col>
 			</Row>
 		</Grid>
 	)
+}
+
+
+Home.propTypes = {
+	history: PropTypes.object.isRequired,
 }
 
 export default withRouter(Home);

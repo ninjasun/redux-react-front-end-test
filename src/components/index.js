@@ -5,6 +5,8 @@ import Root from './Root';
 import Home from './Home';
 import StepperButton from './StepperButton';
 import StepperProgress from './StepperProgress';
+import OrderCard from './OrderCard';
+
 
 export {
 	CheckBox,
@@ -14,4 +16,5 @@ export {
 	Home,
 	StepperButton,
 	StepperProgress,
+	OrderCard,
 }
