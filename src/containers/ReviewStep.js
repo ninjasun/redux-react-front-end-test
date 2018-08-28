@@ -8,7 +8,7 @@ import { Row, Col } from 'react-bootstrap';
 
 
 
-class ReviewStep  extends Component  {
+export class ReviewStep  extends Component  {
 	
 	componentDidMount = () => {
 		const { history , stepper } = this.props;
@@ -97,16 +97,6 @@ const mapStateToProps = state => ({
 	myDough: state.dough.myDough,
 	stepper: state.stepper,
 })
-
-
-// const mapDispatchToProps = dispatch => 
-// 	bindActionCreators(
-// 		{
-// 			submitOrder,
-// 		},
-// 		dispatch,
-// 	);
-
 
 
 export default compose(

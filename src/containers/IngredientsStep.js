@@ -18,7 +18,7 @@ import { StepperButton, CheckBox, PizzaItem } from '../components/';
 	display a form
 */
 
-class IngredientsStep extends Component {
+export class IngredientsStep extends Component {
 	constructor(){
 		super();
 		this.state = {

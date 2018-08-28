@@ -1,11 +1,13 @@
+export const SET_DOUGH = "SET_DOUGH";
+
 
 const initialState = {
 	myDough : {},
 }
 
- export default ( state = initialState, action) => {
+ export default ( state = initialState, action) =>{
 	switch(action.type){
-		case 'SET_DOUGH':
+		case SET_DOUGH:
 			return {...state, myDough: action.dough}
 		default:
 			return state;
@@ -14,7 +16,7 @@ const initialState = {
 
 
 export const setDoughType = (dough) => ({
-	type: 'SET_DOUGH',
+	type: SET_DOUGH,
 	dough: dough,
 })
 

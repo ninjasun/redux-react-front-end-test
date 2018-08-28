@@ -22,7 +22,7 @@ const PizzaItem = ({ isSelected, item, onChange, type, role}) => {
 					type={type}
 					value={item.id} 
 					checked={isSelected} 
-					onChange={() =>{onChange(item)}} 
+					onChange={() => {onChange(item)}} 
 				/>
 	}
 

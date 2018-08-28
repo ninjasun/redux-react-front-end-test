@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
 	
-import { StepperButton } from '../components/';
+import { StepperButton, PizzaItem } from '../components/';
 import { Row, Col } from 'react-bootstrap';
 import  { fetchDoughsTypes }  from '../API_MOCK';
 import { setDoughType } from '../redux-modules/dough';
@@ -14,7 +14,7 @@ import { setStepCompleted } from '../redux-modules/stepper';
 	first step. Choose a dough type
 */
 
-class DoughStep extends Component {
+export class DoughStep extends Component {
 	constructor(){
 		super();
 		this.state = {
@@ -61,14 +61,15 @@ class DoughStep extends Component {
 				</Col>
 				<Col xs={12}>
 					<ul className="list-container" aria-labelledby="radio_group_doughs">
-					{this.state.doughs.map( item => 
-						<li className={this.isSelected(item.id) ? "pizza-item selected" : 'pizza-item'} key={item.id} tabIndex="0" role="radio">
-							<label>
-								<input type="radio" value={item.id} checked={this.isSelected(item.id)} onChange={() =>{this.handleDoughChange(item)}} />
-								<span className="item-info" >{item.description}</span>
-								<span className="item-price" >{item.price} $</span>
-							</label>
-						</li>
+						{this.state.doughs.map( item => 
+							<PizzaItem
+									key={item.id}
+									type="radio"
+									role="radio" 
+									item={item} 
+									isSelected={this.isSelected(item.id)} 
+									onChange={this.handleDoughChange} 
+								/>
 						)}
 					</ul>
 				</Col>
@@ -105,6 +106,7 @@ const mapDispatchToProps = dispatch =>
 		},
 		dispatch,
 	);
+
 
 
 
