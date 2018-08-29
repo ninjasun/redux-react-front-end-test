@@ -52,11 +52,19 @@ export class IngredientsStep extends Component {
 		}
 		else {
 			addIngredient(item);
-			if (myIngredients.lenght > 0){
+			/* set step completed just one time */
+			if (myIngredients.length === 1){
 				setStepCompleted('ingredients');
 			}
 			
 		}
+	}
+
+
+	onKeyDown = (event, item) => {
+		if(event.keyCode == 13){
+		    this.handleIngredientChange(event, item)
+		  }
 	}
 
 
@@ -91,6 +99,7 @@ export class IngredientsStep extends Component {
 									type="checkbox" 
 									isSelected={includes(item, this.props.myIngredients)} 
 									onChange={this.handleIngredientChange} 
+									onKeyDown={this.onKeyDown}
 								/>
 							)}
 						</ul>

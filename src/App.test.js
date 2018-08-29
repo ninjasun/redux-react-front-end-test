@@ -4,9 +4,7 @@ import Root from './components/Root';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { Routes } from './Routes';
-import { mount } from 'enzyme';
-import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import { MemoryRouter } from 'react-router';
 import { BrowserRouter as Router} from 'react-router-dom';

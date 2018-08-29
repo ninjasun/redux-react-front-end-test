@@ -38,6 +38,13 @@ export class DoughStep extends Component {
 	}
 
 
+	onKeyDown = (event, item) => {
+		if(event.keyCode == 13){
+		    this.handleDoughChange(event, item);
+		  }
+	}
+
+
 	isDisabled = () => {
 		return !this.props.stepper[0].completed;
 	}
@@ -69,7 +76,8 @@ export class DoughStep extends Component {
 									item={item} 
 									isSelected={this.isSelected(item.id)} 
 									onChange={this.handleDoughChange} 
-								/>
+									onKeyDown={this.onKeyDown}
+							/>
 						)}
 					</ul>
 				</Col>
