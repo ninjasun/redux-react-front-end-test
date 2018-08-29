@@ -41,8 +41,4 @@ Checkout.propTypes = {
 	match : PropTypes.object.isRequired,
 }
 
-Checkout.defaultProps = {
-	match: {params:{step :'dough'}},
-}
-
 export default withRouter(Checkout);

@@ -1,42 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CheckBox } from './';
 
 
-const PizzaItem = ({ isSelected, item, onChange, type}) => {
-
-	const renderCheckBox = () => {
-		return <CheckBox 
-					type={type}
-					id={"pizza-item-"+ item.id}
-					checked={isSelected} 
-					name={item.name}  
-					value={item.id}  
-					onChange={(e) => {onChange(e, item)}} 
-				/>
-	}
-
-	const renderRadio = () => {
-		return <input 
+const PizzaItem = ({ isSelected, item, onChange, type}) =>  (
+		<li className={isSelected ? "pizza-item selected" : 'pizza-item'} key={item.id} tabIndex="0" role={type}  >
+			<label onChange={(e) => {onChange(e, item)}} >
+				<input 
 					type={type}
 					id={"pizza-item-"+ item.id}
 					value={item.id} 
 					checked={isSelected} 
-					onChange={(e) => {onChange(e, item)}} 
+					onChange={() =>{}}
 				/>
-	}
-
-
-	return (
-		<li className={isSelected ? "pizza-item selected" : 'pizza-item'} key={item.id} tabIndex="0" role={type}  >
-			<label >
-				{type === 'checkbox' ? renderCheckBox() : renderRadio()}
 				<span className="item-info" >{item.name}</span>
 				<span className="item-price" >{item.price} $</span>
 			</label>
 		</li>
 	)
-}
 
 
 PizzaItem.propTypes = {

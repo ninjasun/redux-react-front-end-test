@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 
+import { includes } from '../utils';
 import { Row, Col } from 'react-bootstrap';
 import { addIngredient, removeIngredient } from '../redux-modules/ingredients';
 import { setStepCompleted } from '../redux-modules/stepper';
@@ -46,29 +47,16 @@ export class IngredientsStep extends Component {
 		
 		const { myIngredients, addIngredient, removeIngredient, setStepCompleted } = this.props;
 		
-		if (myIngredients.includes(item)){
+		if (includes(item, myIngredients)){
 			removeIngredient(item.id);
 		}
 		else {
 			addIngredient(item);
-			setStepCompleted('ingredients');
+			if (myIngredients.lenght > 0){
+				setStepCompleted('ingredients');
+			}
+			
 		}
-	}
-
-/*
-* if id is included into myIngredients return true else false
-*/
-	includes = (item) => {
-		const { myIngredients } = this.props;
-
-		if (myIngredients.lenght === 0) return false;
-
-		var found = myIngredients.find( (ingredient) => {
-			return ingredient.id === item.id;
-		});
-		
-		if (found) return true;
-			else return false;
 	}
 
 
@@ -101,7 +89,7 @@ export class IngredientsStep extends Component {
 									key={item.id}
 									item={item}
 									type="checkbox" 
-									isSelected={this.includes(item)} 
+									isSelected={includes(item, this.props.myIngredients)} 
 									onChange={this.handleIngredientChange} 
 								/>
 							)}

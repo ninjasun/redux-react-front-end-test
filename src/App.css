@@ -185,14 +185,14 @@ li.pizza-item label{
 }
 
 li.pizza-item  label input{
-  display: inline-block;
+  display: none;
   width: 30px;
   margin-right: 10px;
 }
 
 li.pizza-item .item-info{
   display: inline-block;
-  
+  margin-left: 30px;
 }
 
 li.pizza-item .item-price{
@@ -228,4 +228,3 @@ li.pizza-item .item-price{
   text-align: right;
   padding-right: 50px;
 }
-

@@ -26,9 +26,6 @@ import  ingredientsReducer from './redux-modules/ingredients';
 
 
 
-
-
-
 const persistConfig = {
   key: 'root',
   storage,
