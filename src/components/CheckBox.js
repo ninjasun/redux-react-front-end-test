@@ -12,7 +12,7 @@ class CheckBox extends React.Component {
   }
 
 
-  componentDidMont(){
+  componentDidMount(){
     this.setState({
       isChecked: this.props.checked,
     })
@@ -34,7 +34,6 @@ class CheckBox extends React.Component {
           checked={this.state.isChecked}
           onChange={this.toggleChange}
           value={this.props.value}
-          type={this.props.type}
         />
     );
   }

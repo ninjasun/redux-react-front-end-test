@@ -6,8 +6,9 @@ import { DoughStep, IngredientsStep, ReviewStep } from '../containers/';
 
 import { StepperProgress } from '../containers/';
 
-
-
+/*
+	Render a step according to the url
+*/
 export const Checkout = ({ match }) =>  {
 	
 	function renderStep (step){
@@ -28,7 +29,7 @@ export const Checkout = ({ match }) =>  {
 		<Grid>
 			<Row>
 				<Col xs={12}>
-					<StepperProgress currentStep={match.params.step}/>
+					<StepperProgress />
 				</Col>
 			</Row>
 			{currentStep}
@@ -38,6 +39,10 @@ export const Checkout = ({ match }) =>  {
 
 Checkout.propTypes = {
 	match : PropTypes.object.isRequired,
+}
+
+Checkout.defaultProps = {
+	match: {params:{step :'dough'}},
 }
 
 export default withRouter(Checkout);

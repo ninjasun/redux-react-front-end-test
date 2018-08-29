@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
+import {  compose } from 'redux';
 import { StepperButton, OrderCard } from '../components/';
 import { Row, Col } from 'react-bootstrap';
 
-
+/*
+ Last step: order review
+*/
 
 export class ReviewStep  extends Component  {
 	
 	componentDidMount = () => {
 		const { history , stepper } = this.props;
+
 		if(!stepper[0].completed){
 			history.push("/checkout/dough");
 		}
@@ -23,13 +26,22 @@ export class ReviewStep  extends Component  {
 
 
 	 onSubmit = () => {
-		alert('congratulation your order was sumbitted')
+	 	const { myIngredients, myDough } = this.props;
+	 	var formData = new FormData();
+
+	 	formData.append('dough', myDough.id);
+	 	myIngredients.map( function(item)  {
+	 		return formData.append(item.name, item.id);
+	 		})
+	 	// POST formData
+		alert('congratulation your order was sumbitted');
+		//reset myDough and myIngredients
 	}
 
 
 	 prev = () => {
 	 	const { history } = this.props;
-		history.push('/checkout/ingredients')
+		history.push('/checkout/ingredients');
 	}
 
 
@@ -37,7 +49,7 @@ export class ReviewStep  extends Component  {
 		var price = 0;
 		price += parseFloat(this.props.myDough.price);
 		this.props.myIngredients.map( item => {
-			price += parseFloat(item.price);
+			return price += parseFloat(item.price);
 		})
 		
 		return price +' $';

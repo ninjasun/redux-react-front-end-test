@@ -10,12 +10,10 @@ import { setStepCompleted } from '../redux-modules/stepper';
 
 import  { fetchIngredients }  from '../API_MOCK';
  
-import { StepperButton, CheckBox, PizzaItem } from '../components/';
+import { StepperButton,  PizzaItem } from '../components/';
 
 /*
-	load and display data from API: impasto
-	load current pizza 
-	display a form
+	second step. add ingredient
 */
 
 export class IngredientsStep extends Component {
@@ -25,6 +23,8 @@ export class IngredientsStep extends Component {
 			ingredients : [],
 		}
 	}
+
+
 	componentDidMount(){
 		const { history, stepper } = this.props;
 
@@ -44,7 +44,6 @@ export class IngredientsStep extends Component {
 		
 		if (myIngredients.includes(item)){
 			removeIngredient(item.id);
-			/* TO DO optimize this. case no mor eingredients. user wants white pizza?*/
 		}
 		else {
 			addIngredient(item);
@@ -53,7 +52,7 @@ export class IngredientsStep extends Component {
 	}
 
 /*
-	if id is included into myIngredients return true else false
+* if id is included into myIngredients return true else false
 */
 	includes = (item) => {
 		const { myIngredients } = this.props;
@@ -96,7 +95,6 @@ export class IngredientsStep extends Component {
 							{this.state.ingredients.map( item => 
 								<PizzaItem 
 									item={item}
-									role="checkbox"
 									type="checkbox" 
 									isSelected={this.includes(item)} 
 									onChange={this.handleIngredientChange} 
@@ -140,7 +138,6 @@ const mapDispatchToProps = dispatch =>
 		},
 		dispatch,
 	);
-
 
 
 export default compose(

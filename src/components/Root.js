@@ -30,7 +30,7 @@ const Root = ({ store, persistor }) => (
 
 Root.proptTypes = {
 	store: PropTypes.object.isRequired,
-	persistor: PropTypes.object.isRequired,
+	persistor: PropTypes.object,
 }
 
 export default Root;

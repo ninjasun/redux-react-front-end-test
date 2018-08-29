@@ -66,7 +66,6 @@ export class DoughStep extends Component {
 							<PizzaItem
 									key={item.id}
 									type="radio"
-									role="radio" 
 									item={item} 
 									isSelected={this.isSelected(item.id)} 
 									onChange={this.handleDoughChange} 
@@ -107,8 +106,6 @@ const mapDispatchToProps = dispatch =>
 		},
 		dispatch,
 	);
-
-
 
 
 export default compose(

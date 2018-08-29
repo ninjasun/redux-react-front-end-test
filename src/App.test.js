@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/Root';
+
 import { createStore } from 'redux';
 import Adapter from 'enzyme-adapter-react-16';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import Enzyme from 'enzyme';
+import { MemoryRouter } from 'react-router';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 import { DoughStep } from './containers/DoughStep';
 import { StepperProgress } from './containers/StepperProgress';
 import { Checkout } from './components/Checkout';
-//import  ConnectedDoughStep  from './containers/';
+
 import  pizzaOrderApp from './redux-modules';
 
 import { setDoughType, SET_DOUGH } from './redux-modules/dough';
@@ -20,13 +24,25 @@ import  ingredientsReducer from './redux-modules/ingredients'
 
 
 Enzyme.configure({ adapter: new Adapter() });
-const store = createStore(pizzaOrderApp);
+
+
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, pizzaOrderApp);
+
+const store = createStore(persistedReducer);
+
+const persistor = persistStore(store);
 
 
 
 it('renders the app without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Root store={store} />, div);
+  ReactDOM.render(<Root store={store} persistor={persistor} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
@@ -211,28 +227,21 @@ describe('******** Component StepperProgress **********', () => {
 
 });
 
-describe('******* Component Checkout ********', () => {
+describe('******* ROUTING ********', () => {
 
-	function setup() {
-	  const props = {
-	    match:{
-	    	params:{
-	    		step :'dough'
-	    	}
-	    }
-  	};
+	
 
-  	const enzymeWrapper = mount(<Checkout {...props} />)
-	return {
-	    props,
-	    enzymeWrapper
-	  }
-	}
+  	const enzymeWrapper = mount(
+  		<MemoryRouter initialEntries={[ '/checkout' ]}>
+  			<Root store={store} persistor={persistor}/>
+  		</MemoryRouter>
+  		)
+	
 
-	const { enzymeWrapper } = setup();
 
 	it('should render DoughStep according to the route', () =>{
-		expect(enzymeWrapper.find('h1').text()).toBe('Choose your dough type');
+		//expect(enzymeWrapper.find('h1').text()).toBe('Choose your dough type');
+		console.log("ciao")
 	})
 
 });
