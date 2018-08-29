@@ -12,7 +12,8 @@ import { Row, Col } from 'react-bootstrap';
 
 export class ReviewStep  extends Component  {
 	
-	componentDidMount = () => {
+
+	componentWillMount(){
 		const { history , stepper } = this.props;
 
 		if(!stepper[0].completed){
@@ -89,16 +90,16 @@ export class ReviewStep  extends Component  {
 
 ReviewStep.propTypes = {
 	myDough: PropTypes.shape({
-		id: PropTypes.number.isRequired,
-		name: PropTypes.string.isRequired,
-		description: PropTypes.string.isRequired,
-		price: PropTypes.string.isRequired,
-	}).isRequired,
+		id: PropTypes.number,
+		name: PropTypes.string,
+		description: PropTypes.string,
+		price: PropTypes.string,
+	}),
 	myIngredients: PropTypes.arrayOf(PropTypes.shape({
-		id: PropTypes.number.isRequired,
-		name: PropTypes.string.isRequired,
-		description: PropTypes.string.isRequired,
-		price: PropTypes.string.isRequired,
+		id: PropTypes.number,
+		name: PropTypes.string,
+		description: PropTypes.string,
+		price: PropTypes.string,
 	})).isRequired,
 	history: PropTypes.object.isRequired,
 	stepper: PropTypes.array.isRequired,

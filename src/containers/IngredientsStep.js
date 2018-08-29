@@ -25,12 +25,16 @@ export class IngredientsStep extends Component {
 	}
 
 
-	componentDidMount(){
+	componentWillMount(){
 		const { history, stepper } = this.props;
 
 		if(!stepper[0].completed){
 			history.push("/checkout/dough");
 		}
+	}
+
+	componentDidMount(){
+		
 		var ingredients = fetchIngredients();
 		this.setState({
 			ingredients : ingredients,
@@ -94,6 +98,7 @@ export class IngredientsStep extends Component {
 					<ul className="list-container" aria-labelledby="ingredients">
 							{this.state.ingredients.map( item => 
 								<PizzaItem 
+									key={item.id}
 									item={item}
 									type="checkbox" 
 									isSelected={this.includes(item)} 
@@ -116,11 +121,11 @@ export class IngredientsStep extends Component {
 
 IngredientsStep.propTypes = {
 	myIngredients: PropTypes.arrayOf(PropTypes.shape({
-		id: PropTypes.number,
-		name: PropTypes.string,
-		description: PropTypes.string,
-		price: PropTypes.string,
-	})),
+		id: PropTypes.number.isRequired,
+		name: PropTypes.string.isRequired,
+		description: PropTypes.string.isRequired,
+		price: PropTypes.string.isRequired,
+	})).isRequired,
 	stepper: PropTypes.array.isRequired,
 }
 

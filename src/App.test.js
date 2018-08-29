@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/Root';
-
+import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import Adapter from 'enzyme-adapter-react-16';
+import { Routes } from './Routes';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
-import Enzyme from 'enzyme';
+
 import { MemoryRouter } from 'react-router';
+import { BrowserRouter as Router} from 'react-router-dom';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -18,12 +19,13 @@ import { Checkout } from './components/Checkout';
 
 import  pizzaOrderApp from './redux-modules';
 
+import { setStepCompleted } from './redux-modules/stepper';
 import { setDoughType, SET_DOUGH } from './redux-modules/dough';
 import { addIngredient, ADD_INGREDIENT, REMOVE_INGREDIENT } from './redux-modules/ingredients';
-import  ingredientsReducer from './redux-modules/ingredients'
+import  ingredientsReducer from './redux-modules/ingredients';
 
 
-Enzyme.configure({ adapter: new Adapter() });
+
 
 
 
@@ -228,20 +230,101 @@ describe('******** Component StepperProgress **********', () => {
 });
 
 describe('******* ROUTING ********', () => {
-
+	//console.log("store is: ", store.getState())
+	const store = createStore(pizzaOrderApp);
 	
+  	const renderRoute = path => 
+  		mount(
+  			<Provider store={store}>
+  				<MemoryRouter initialEntries={[path]}>
+  					<Routes />
+  				</MemoryRouter>
+  			</Provider>
+  		);
+  	it('should render Home according to the route /', () =>{
+		const wrapper = renderRoute('/')
+		expect(wrapper.find('h1').text()).toEqual('Welcome to the pizza experience');
+	})
 
-  	const enzymeWrapper = mount(
-  		<MemoryRouter initialEntries={[ '/checkout' ]}>
-  			<Root store={store} persistor={persistor}/>
-  		</MemoryRouter>
-  		)
+	it('should render DoughStep according to the route /checkout', () =>{
+		const wrapper = renderRoute('/checkout')
+		expect(wrapper.find('h1').text()).toEqual('Choose your dough type');
+	})
+
+	it('should render DoughStep according to the route /checkout/dough', () =>{
+		const wrapper = renderRoute('/checkout/dough')
+		expect(wrapper.find('h1').text()).toEqual('Choose your dough type');
+	})
+
+	it('should redirect and render DoughStep according to the route /checkout/ingredients', () =>{
+		const wrapper = renderRoute('/checkout/ingredients')
+		expect(wrapper.find('h1').text()).toEqual('Choose your dough type');
+	})
+
+	it('should redirect and render DoughStep according to the route /checkout/review', () =>{
+		const wrapper = renderRoute('/checkout/review')
+		expect(wrapper.find('h1').text()).toEqual('Choose your dough type');
+	})
+
+
+});
+
+
+describe('******* ROUTING step 1 is completed ********', () => {
 	
+	const store = createStore(pizzaOrderApp);
+	//console.log("store is: ", store.getState())
+	store.dispatch(setStepCompleted('dough'));
+
+  	const renderRoute = path => 
+  		mount(
+  			<Provider store={store}>
+  				<MemoryRouter initialEntries={[path]}>
+  					<Routes />
+  				</MemoryRouter>
+  			</Provider>
+  		);
+
+	it('should redirect and render IngredientsStep according to the route /checkout/review', () =>{
+		const wrapper = renderRoute('/checkout/review')
+		expect(wrapper.find('h1').text()).toEqual('Choose your ingredients');
+	})
+
+  	//console.log("store is: ", store.getState())
+
+  	it('should  render IngredientsStep according to the route /checkout/ingredients', () =>{
+		const wrapper = renderRoute('/checkout/ingredients')
+		expect(wrapper.find('h1').text()).toEqual('Choose your ingredients');
+	})
+
+});
 
 
-	it('should render DoughStep according to the route', () =>{
-		//expect(enzymeWrapper.find('h1').text()).toBe('Choose your dough type');
-		console.log("ciao")
+describe('******* ROUTING step 2 is completed ********', () => {
+	
+	const store = createStore(pizzaOrderApp);
+	//console.log("store is: ", store.getState())
+	store.dispatch(setStepCompleted('dough'));
+	store.dispatch(setStepCompleted('ingredients'));
+  	const renderRoute = path => 
+  		mount(
+  			<Provider store={store}>
+  				<MemoryRouter initialEntries={[path]}>
+  					<Routes />
+  				</MemoryRouter>
+  			</Provider>
+  		);
+
+	it('should render ReviewStep according to the route /checkout/review', () =>{
+		const wrapper = renderRoute('/checkout/review')
+		expect(wrapper.find('h1').text()).toEqual('Order review');
+	})
+
+  	//console.log("store is: ", store.getState())
+
+  	it('should render IngredientsStep according to the route /checkout/ingredients', () =>{
+		const wrapper = renderRoute('/checkout/ingredients')
+		expect(wrapper.find('h1').text()).toEqual('Choose your ingredients');
 	})
 
 });
