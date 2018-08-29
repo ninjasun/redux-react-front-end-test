@@ -20,7 +20,7 @@ function OrderCard({dough, ingredients, price}){
 }
 
 OrderCard.propTypes = {
-	
+	dough: PropTypes.object.isRequired,
 	ingredients: PropTypes.array,
 	price: PropTypes.string.isRequired,
 }

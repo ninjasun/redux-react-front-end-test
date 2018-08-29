@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { withRouter } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { DoughStep, IngredientsStep, ReviewStep } from '../containers/';
 
-import { StepperProgress } from './';
+import { StepperProgress } from '../containers/';
 
 
 
-const Checkout = ({ match }) =>  {
+export const Checkout = ({ match }) =>  {
 	
 	function renderStep (step){
 		switch(step){
 			case 'dough':
-				return   <DoughStep key="doughAnimation"/>
+				return   <DoughStep />
 			case 'ingredients':
-				return  <IngredientsStep key="ingredientsAnimation" />
+				return  <IngredientsStep  />
 			case 'review':
-				return <ReviewStep key="reviewAnimation"/>
+				return <ReviewStep />
 			default:
 				return <p>undefined step</p>
 		}
@@ -40,4 +40,4 @@ Checkout.propTypes = {
 	match : PropTypes.object.isRequired,
 }
 
-export default Checkout;
+export default withRouter(Checkout);

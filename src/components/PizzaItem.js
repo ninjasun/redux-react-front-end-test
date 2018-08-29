@@ -10,6 +10,7 @@ const PizzaItem = ({ isSelected, item, onChange, type, role}) => {
 	const renderCheckBox = () => {
 		return <CheckBox 
 					type={type}
+					id={"pizza-item-"+item.id}
 					checked={isSelected} 
 					name={item.name}  
 					value={item.id}  
@@ -20,9 +21,10 @@ const PizzaItem = ({ isSelected, item, onChange, type, role}) => {
 	const renderRadio = () => {
 		return <input 
 					type={type}
+					id={"pizza-item-"+item.id}
 					value={item.id} 
 					checked={isSelected} 
-					onChange={() => {onChange(item)}} 
+					onChange={(e) => {onChange(e, item)}} 
 				/>
 	}
 

@@ -9,7 +9,8 @@ import { shallow } from 'enzyme';
 import Enzyme from 'enzyme';
 
 import { DoughStep } from './containers/DoughStep';
-
+import { StepperProgress } from './containers/StepperProgress';
+import { Checkout } from './components/Checkout';
 //import  ConnectedDoughStep  from './containers/';
 import  pizzaOrderApp from './redux-modules';
 
@@ -17,10 +18,13 @@ import { setDoughType, SET_DOUGH } from './redux-modules/dough';
 import { addIngredient, ADD_INGREDIENT, REMOVE_INGREDIENT } from './redux-modules/ingredients';
 import  ingredientsReducer from './redux-modules/ingredients'
 
+
 Enzyme.configure({ adapter: new Adapter() });
 const store = createStore(pizzaOrderApp);
 
-it('renders without crashing', () => {
+
+
+it('renders the app without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<Root store={store} />, div);
   ReactDOM.unmountComponentAtNode(div);
@@ -28,7 +32,7 @@ it('renders without crashing', () => {
 
 
 
-describe('dough actions', () => {
+describe('******* dough actions ********', () => {
   it('should create an action to set a dough', () => {
     const dough = {
     	id: 1,
@@ -46,7 +50,7 @@ describe('dough actions', () => {
 })
 
 
-describe('ingredients actions', () => {
+describe('******** ingredients actions ***********', () => {
   it('should create an action to add an ingredient', () => {
     const item = {
     	id: 4,
@@ -63,7 +67,7 @@ describe('ingredients actions', () => {
   })
 })
 
-describe('ingredients reducer', () => {
+describe('****** ingredients reducer **********', () => {
 	it('should handle ADD_INGREDIENT', () => {
 
 		const item = {
@@ -90,9 +94,7 @@ describe('ingredients reducer', () => {
 			}
 		)
 	})
-})
 
-describe('ingredients reducer', () => {
 	it('should handle REMOVE_INGREDIENT', () => {
 
 		const item = {
@@ -123,7 +125,7 @@ describe('ingredients reducer', () => {
 
 
 
-describe('Component DoughStep ', () => {
+describe('******** Component DoughStep *********', () => {
 
 	function setup() {
 	  const props = {
@@ -148,20 +150,89 @@ describe('Component DoughStep ', () => {
   	expect(enzymeWrapper.find('ul').hasClass('list-container')).toBe(true);
   })
 
-  it("should render 5 list element from the state ", () => {
+  it("should set state with 5 doughs", () => {
  	enzymeWrapper.instance().componentDidMount();
  	expect(enzymeWrapper.state('doughs').length).toEqual(5);
   	
   })
 
   it("should have the radio button with id/value 2 checked ", () => {
-	
+	const radio = enzymeWrapper.find('#pizza-item-2');
+	expect(radio.props().checked).toEqual(true);
 
+  })
+
+  it("should have the radio button with id/value 3 not checked ", () => {
+	const radio = enzymeWrapper.find('#pizza-item-3');
+	expect(radio.props().checked).toEqual(false);
 
   })
   
-  
+  it("should set dough type with id 1", () => {
+	enzymeWrapper.setProps({
+		myDough:{
+			id:1,
+			name:"Soft",
+			description: 'soft dough',
+			price: '3.50'
+		}
+	})
+	const radio = enzymeWrapper.find('#pizza-item-1');
+	expect(radio.props().checked).toEqual(true);
+
+  })
 
   
 });
 
+describe('******** Component StepperProgress **********', () => {
+	function setup() {
+	  const props = {
+	    stepper: [{completed:true}, {completed:false}, {completed:false}],
+	    match:{
+	    	params:{
+	    		step :'dough'
+	    	}
+	    }
+  	};
+
+  	const enzymeWrapper = mount(<StepperProgress {...props} />)
+	return {
+	    props,
+	    enzymeWrapper
+	  }
+	}
+
+	const { enzymeWrapper } = setup();
+
+	it('should have li dough with class active ', () => {
+		expect(enzymeWrapper.find('.active').text()).toEqual(' dough ')
+	})
+
+});
+
+describe('******* Component Checkout ********', () => {
+
+	function setup() {
+	  const props = {
+	    match:{
+	    	params:{
+	    		step :'dough'
+	    	}
+	    }
+  	};
+
+  	const enzymeWrapper = mount(<Checkout {...props} />)
+	return {
+	    props,
+	    enzymeWrapper
+	  }
+	}
+
+	const { enzymeWrapper } = setup();
+
+	it('should render DoughStep according to the route', () =>{
+		expect(enzymeWrapper.find('h1').text()).toBe('Choose your dough type');
+	})
+
+});

@@ -31,7 +31,8 @@ export class DoughStep extends Component {
 	}
 
 
-	handleDoughChange = (item) => {
+	handleDoughChange = (e, item) => {
+		e.preventDefault();
 		this.props.setDoughType(item);
 		this.props.setStepCompleted('dough');
 	}

@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 	inactive has background red opacity 0.7
 */
 
-const StepperProgress = ({stepper, match}) => {
+export const StepperProgress = ({stepper, match}) => {
 	
 	const urlStep = match.params.step;
 	
