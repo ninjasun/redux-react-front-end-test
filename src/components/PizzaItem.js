@@ -10,9 +10,10 @@ const PizzaItem = ({ isSelected, item, onChange, type, onKeyDown}) =>  (
 			onKeyDown={(e) => {onKeyDown(e, item)}}
 			onChange={(e) => {onChange(e, item)}} 
 		 >
-			<label >
+			<label for={"pizza-item-"+ item.id}>
 				<input 
 					type={type}
+					name={"pizza-item-"+ item.id}
 					id={"pizza-item-"+ item.id}
 					value={item.id} 
 					checked={isSelected} 
